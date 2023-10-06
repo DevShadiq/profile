@@ -1,0 +1,27 @@
+*{
+	margin:0px;
+	padding:0px;
+	box-sizing:border-box;
+}
+
+.login-section{
+	height:100vh;
+}
+
+
+.error-msg {
+    width: 60%;
+    margin: auto;
+    text-align: center;
+    font-size: 14px;
+    padding: 6px;
+    margin-bottom: 20px;
+    position: fixed;
+    top: 12px;
+}
+.success {
+    background: #d1e7dd;
+}
+.danger {
+    background: #f8d7da;
+}

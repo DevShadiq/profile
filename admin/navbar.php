@@ -65,11 +65,11 @@ echo  $p_path . $p_name . "Test";
                 </a>
             </li>
 
-            <li>
+            <!-- <li>
                 <a href="<?php echo $path; ?>/menu/"><i class="sidebar-item-icon fa fa-th-large"></i>
                     <span class="nav-label">Menu</span>
                 </a>
-            </li>
+            </li> -->
 
             <li>
                 <a href="<?php echo $path; ?>/personal/"><i class="sidebar-item-icon fa fa-th-large"></i>

@@ -17,6 +17,7 @@ include 'sidebar.php';
 
 <section class="home" id="home">
     <?php
+    $documentDirectory = './admin/profile/doc/';
     $per_sql2 = "select * from pro_personal_info order by per_id desc limit 1";
     $per_result2 = $conn->query($per_sql2);
     $per_count2 = $per_result2->num_rows;
@@ -32,7 +33,8 @@ include 'sidebar.php';
             <div class="content">
                 <h3><?php echo $per_row2['per_name']; ?></h3>
                 <p>I am a <?php echo $per_row2['per_designation']; ?></p>
-                <a href="admin/<?php echo $per_row2['per_cv']; ?>" class="btn">download CV</a>
+                <a href="<?php echo $documentDirectory . $per_row2['per_cv']; ?>" class="btn">download CV</a>
+
             </div>
 
     <?php

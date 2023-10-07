@@ -8,7 +8,7 @@ if ($_SESSION['login'] != true) {
 } else {
 
 
-	$title = "Edit User";
+	$title = "Edit Service";
 	include('../../connect.php');
 	include('../header.php');
 	include('../navbar.php');
@@ -20,7 +20,7 @@ if ($_SESSION['login'] != true) {
 	} elseif ($_GET['u'] == '') {
 		header('Location:index.php');
 	} else {
-		$expid = $_GET['u'];
+		$serid = $_GET['u'];
 	} ?>
 
 
@@ -33,31 +33,34 @@ if ($_SESSION['login'] != true) {
 						<?php
 						if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-							$u_exptitle  = $_POST['u_exptitle'];
-							$u_expcontent  = $_POST['u_expcontent'];
+							$u_sertitle  = $_POST['u_sertitle'];
+							$u_sericon  = $_POST['u_sericon'];
+							$u_sercontent  = $_POST['u_sercontent'];
 							$u_status  = $_POST['u_status'];
 
-							$u_exptitle         = $conn->real_escape_string($u_exptitle);
-							$u_expcontent         = $conn->real_escape_string($u_expcontent);
+							$u_sertitle         = $conn->real_escape_string($u_sertitle);
+							$u_sericon         = $conn->real_escape_string($u_sericon);
+							$u_sercontent         = $conn->real_escape_string($u_sercontent);
 							$u_status        = $conn->real_escape_string($u_status);
 
 
 
 
-							$update_sc = "update pro_experience
-           set
-		   exp_title      = '$u_exptitle',		
-		   exp_content    = '$u_expcontent',		   
-		   exp_status   = '$u_status'
-		   where exp_slug    = '$expid'";
+							$update_sc = "update pro_service
+         					  set
+								ser_title      = '$u_sertitle',									
+								ser_content    = '$u_sercontent',
+								ser_icon = '$u_sericon',		   
+								ser_status   = '$u_status'
+								where ser_slug    = '$serid'";
 
 							$update_result = $conn->query($update_sc);
 
 							if ($update_result) {
-								echo '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> User Experience updated successfully !!</div>';
+								echo '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> User Service updated successfully !!</div>';
 								echo "<meta http-equiv='refresh' content='3, URL=index.php'>";
 							} else {
-								echo '<div class="alert alert-danger alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> User Experience not updated !!</div>';
+								echo '<div class="alert alert-danger alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> User Service not updated !!</div>';
 							}
 						}
 
@@ -68,36 +71,44 @@ if ($_SESSION['login'] != true) {
 							<i class="fa fa-plus" aria-hidden="true"></i> Edit User
 						</div>
 						<?php
-						$edit_sql = "select * from pro_experience where exp_slug = '$expid'";
+						$edit_sql = "select * from pro_service where ser_slug = '$serid'";
 						$edit_result = $conn->query($edit_sql);
 						while ($edit_row = $edit_result->fetch_assoc()) { ?>
 							<div class="card-body student2 pl-4 pr-4">
 								<form action="" method="post" charset="utf-8" data-parsley-validate="" enctype="multipart/form-data">
 									<div class="form-row">
 										<div class="form-group col-md-6">
-											<label for="u_exptitle">Experience Title &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-											<input type="text" class="form-control" id="u_exptitle" placeholder="Enter Experience Title" name="u_exptitle" value="<?php if (isset($edit_row['exp_title'])) {
-																																										echo $edit_row['exp_title'];
-																																									} ?>" data-parsley-trigger="change" data-parsley-required autocomplete>
+											<label for="u_sertitle">Service Title &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+											<input type="text" class="form-control" id="u_sertitle" placeholder="Enter Service Title" name="u_sertitle" value="<?php if (isset($edit_row['ser_title'])) {
+																																									echo $edit_row['ser_title'];
+																																								} ?>" data-parsley-trigger="change" data-parsley-required autocomplete>
+										</div>
+
+
+										<div class="form-group col-md-6">
+											<label for="u_sericon">Service Content&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+											<input type="text" class="form-control" id="u_sericon" placeholder="Service Content" name="u_sericon" value="<?php if (isset($edit_row['ser_icon'])) {
+																																								echo $edit_row['ser_icon'];
+																																							} ?>" data-parsley-trigger="change">
 										</div>
 
 
 
 										<div class="form-group col-md-6">
-											<label for="u_expcontent">Experience Content&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-											<input type="text" class="form-control" id="u_expcontent" placeholder="Experience Content" name="u_expcontent" value="<?php if (isset($edit_row['exp_content'])) {
-																																										echo $edit_row['exp_content'];
-																																									} ?>" data-parsley-trigger="change" data-parsley-required autocomplete data-parsley-length="[10, 50]">
+											<label for="u_sercontent">Service Content&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+											<input type="text" class="form-control" id="u_sercontent" placeholder="Service Content" name="u_sercontent" value="<?php if (isset($edit_row['ser_content'])) {
+																																									echo $edit_row['ser_content'];
+																																								} ?>" data-parsley-trigger="change">
 										</div>
 
 										<div class="form-group col-md-6">
 											<label for="u_status">status&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
 											<select class="form-control" name="u_status" data-parsley-required style="font-size:14px;color:#868e96;">
 												<option value="" style="font-size:14px;">Select Status</option>
-												<option <?php if (isset($edit_row['exp_status']) && $edit_row['exp_status'] == 'active') {
+												<option <?php if (isset($edit_row['ser_status']) && $edit_row['ser_status'] == 'active') {
 															echo 'selected';
 														} ?> value="active" style="font-size:14px;">Active</option>
-												<option <?php if (isset($edit_row['exp_status']) && $edit_row['exp_status'] == 'pending') {
+												<option <?php if (isset($edit_row['ser_status']) && $edit_row['ser_status'] == 'pending') {
 															echo 'selected';
 														} ?> value="pending" style="font-size:14px;">Pending</option>
 

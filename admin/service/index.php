@@ -8,7 +8,7 @@ if ($_SESSION['login'] != true) {
 } else {
 
 
-	$title = "Add Experience";
+	$title = "Add Service";
 
 	include('../../connect.php');
 	include('../header.php');
@@ -23,28 +23,30 @@ if ($_SESSION['login'] != true) {
 						<?php
 						if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-							$exp_title  = $_POST['exp_title'];
-							$exp_content  = $_POST['exp_content'];
-							$exp_status  = $_POST['exp_status'];
+							$ser_title  = $_POST['ser_title'];
+							$ser_content  = $_POST['ser_content'];
+							$ser_status  = $_POST['ser_status'];
+							$ser_icon = $_POST['ser_icon'];
 
-							$exp_slug = uniqid();
+							$ser_slug = uniqid();
 
-							$exp_title         = $conn->real_escape_string($exp_title);
-							$exp_content         = $conn->real_escape_string($exp_content);
-							$exp_status         = $conn->real_escape_string($exp_status);
+							$ser_title         = $conn->real_escape_string($ser_title);
+							$ser_content         = $conn->real_escape_string($ser_content);
+							$ser_status         = $conn->real_escape_string($ser_status);
+							$ser_icon         = $conn->real_escape_string($ser_icon);
 
 
 
-							$exp_sql = "insert into pro_experience(exp_title,exp_content,exp_status,exp_slug)
-values('$exp_title','$exp_content','$exp_status','$exp_slug')";
+							$ser_sql = "insert into pro_service(ser_icon, ser_title,ser_content,ser_status,ser_slug)
+							values('$ser_icon', '$ser_title','$ser_content','$ser_status','$ser_slug')";
 
-							$exp_result = $conn->query($exp_sql);
+							$ser_result = $conn->query($ser_sql);
 
-							if ($exp_result) {
+							if ($ser_result) {
 
-								echo '<div class="alert alert-success alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data submitted successfully</div>';
+								echo '<div class="alert alert-success alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Service Data submitted successfully</div>';
 							} else {
-								echo '<div class="alert alert-danger alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data not submitted </div>';
+								echo '<div class="alert alert-danger alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Service Data not submitted </div>';
 							}
 						}
 
@@ -53,7 +55,7 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 
 					<div class="card form">
 						<div class="card-header">
-							Add Experience
+							Add service
 						</div>
 
 						<div class="card-body student2 pl-4 pr-4">
@@ -61,27 +63,35 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 								<div class="form-row">
 
 									<div class="form-group col-md-6">
-										<label for="exp_title">Experience Title &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-										<input type="text" class="form-control" id="exp_title" placeholder="Enter Experience Title" name="exp_title" value="<?php if (isset($exp_title)) {
-																																								echo $exp_title;
+										<label for="ser_title">Service Title &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+										<input type="text" class="form-control" id="ser_title" placeholder="Enter service Title" name="ser_title" value="<?php if (isset($ser_title)) {
+																																								echo $ser_title;
 																																							} ?>" data-parsley-trigger="change" data-parsley-required autocomplete>
 									</div>
 
 									<div class="form-group col-md-6">
-										<label for="exp_content">Experience Content &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-										<input type="text" class="form-control" placeholder="Enter Experience Content" name="exp_content" value="<?php if (isset($exp_content)) {
-																																						echo $exp_content;
-																																					} ?>" autocomplete data-parsley-required>
+										<label for="ser_icon">Service Icon &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+										<input type="text" class="form-control" placeholder="Enter service icon" name="ser_icon" value="<?php if (isset($ser_icon)) {
+																																			echo $ser_icon;
+																																		} ?>" autocomplete data-parsley-required>
 									</div>
 
 									<div class="form-group col-md-6">
-										<label for="exp_status">Experience Status&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-										<select class="form-control" name="exp_status" data-parsley-required style="font-size:14px;color:#868e96;">
+										<label for="ser_content">Service Content &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+										<input type="text" class="form-control" placeholder="Enter service Content" name="ser_content" value="<?php if (isset($ser_content)) {
+																																					echo $ser_content;
+																																				} ?>" autocomplete data-parsley-required>
+									</div>
+
+
+									<div class="form-group col-md-6">
+										<label for="ser_status">Service Status&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+										<select class="form-control" name="ser_status" data-parsley-required style="font-size:14px;color:#868e96;">
 											<option value="" style="font-size:14px;">Select Status</option>
-											<option <?php if (isset($exp_status) && $exp_status == 'active') {
+											<option <?php if (isset($ser_status) && $ser_status == 'active') {
 														echo 'selected';
 													} ?> value="active" style="font-size:14px;">Active</option>
-											<option <?php if (isset($exp_status) && $exp_status == 'pending') {
+											<option <?php if (isset($ser_status) && $ser_status == 'pending') {
 														echo 'selected';
 													} ?> value="pending" style="font-size:14px;">Pending</option>
 										</select>
@@ -123,14 +133,14 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 						</div>
 
 						<div class="ibox-head">
-							<div class="ibox-title">Experience List</div>
+							<div class="ibox-title">service List</div>
 						</div>
 						<div class="ibox-body data">
 							<table class="table table-bordered" id="example-table" cellspacing="0" width="100%">
 								<thead>
 									<tr class="text-center" style="font-size:15px;text-align:center !important;">
-										<th>Experience Title</th>
-										<th>Experience Content</th>
+										<th>service Title</th>
+										<th>service Content</th>
 										<th>Status</th>
 										<th>Action</th>
 									</tr>
@@ -138,22 +148,22 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 
 								<tbody>
 									<?php
-									$exp_sql = "select * from pro_experience";
-									$exp_result = $conn->query($exp_sql);
-									while ($exp_row = $exp_result->fetch_assoc()) {
+									$ser_sql = "select * from pro_service";
+									$ser_result = $conn->query($ser_sql);
+									while ($ser_row = $ser_result->fetch_assoc()) {
 									?>
 
 										<tr class="text-center" style="font-size:15px;">
 
-											<td><?php echo $exp_row['exp_title']; ?></td>
-											<td><?php echo $exp_row['exp_content']; ?></td>
-											<td><?php echo $exp_row['exp_status']; ?></td>
+											<td><?php echo $ser_row['ser_title']; ?></td>
+											<td><?php echo $ser_row['ser_content']; ?></td>
+											<td><?php echo $ser_row['ser_status']; ?></td>
 
 											<td>
 
-												<a href="edit.php?u=<?php echo $exp_row['exp_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(90deg,#ef3e0f,#ffb800);padding:1px 5px;border-radius:4px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="edit.php?u=<?php echo $ser_row['ser_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(90deg,#ef3e0f,#ffb800);padding:1px 5px;border-radius:4px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-												<a data-toggle="modal" data-target="#exp<?php echo $exp_row['exp_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(to right, #ff416c, #ff4b2b);padding:1px 5px;border-radius:4px;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+												<a data-toggle="modal" data-target="#ser<?php echo $ser_row['ser_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(to right, #ff416c, #ff4b2b);padding:1px 5px;border-radius:4px;"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
 											</td>
 

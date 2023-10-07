@@ -1,22 +1,27 @@
 <?php ob_start();
 session_start();
 
-if($_SESSION['login'] != true){
-	header('Location:../login.php');
-}else{
+if ($_SESSION['login'] != true) {
+    header('Location:../login.php');
+} else {
 
-$title = "Admin panel";
-include('../connect.php');
-include('path.php');
-include('header.php');
-include('navbar.php');
+    $title = "Admin panel";
+    include('../connect.php');
+    include('path.php');
+    include('header.php');
+    include('navbar2.php');
+
 ?>
 
- <div class="content-wrapper">
-            <!-- START PAGE CONTENT-->
-            <div class="page-content fade-in-up">         
-			  <div class="row">
-			  <!--
+
+
+
+
+    <div class="content-wrapper">
+        <!-- START PAGE CONTENT-->
+        <div class="page-content fade-in-up">
+            <div class="row">
+                <!--
                     <div class="col-lg-3 col-md-6">
                         <div class="ibox bg-success color-white widget-stat">
                             <div class="ibox-body">
@@ -108,15 +113,12 @@ include('navbar.php');
                     </div>
 
 -->
-			
-					
-                </div>
-   </div>
- </div> 
- <?php
-include('footer.php');
 
+
+            </div>
+        </div>
+    </div>
+<?php
+    include('footer.php');
 }
-?>			
-			
-          
+?>

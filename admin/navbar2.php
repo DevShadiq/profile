@@ -40,7 +40,7 @@ echo  $p_path . $p_name . "Test";
         <ul class="nav navbar-toolbar">
             <li class="dropdown dropdown-user">
                 <a class="nav-link dropdown-toggle link" data-toggle="dropdown">
-                    <img src="../<?php echo $p_path; ?>" style="width:45px; height:45px;" />
+                    <img src="./<?php echo $p_path; ?>" style="width:45px; height:45px;" />
                     <span><?php echo $p_uname; ?></span><i class="fa fa-angle-down m-l-5"></i></a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="<?php echo $path; ?>/profile.php"><i class="fa fa-user"></i>Profile</a>

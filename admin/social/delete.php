@@ -24,16 +24,15 @@ if(!isset($_GET['deleteid'])){
 	
 	if($result_delete_sc){
 		
-		$_SESSION['error'] = '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>Done !! User Data Deleted successfully ! </div>';
+		$_SESSION['error'] = '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>Done !! Social Link Data Deleted successfully ! </div>';
 		
 		  header('location:index.php');
 		  exit();
 		  
 	}else{
 		
-		$_SESSION['error'] = '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>Ups !! User Data not Deleted ! </div>';
+		$_SESSION['error'] = '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>Ups !! Social Link Data not Deleted ! </div>';
 		  header('location:index.php');
 		  exit();
 	}
 }
-?>

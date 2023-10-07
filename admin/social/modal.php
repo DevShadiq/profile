@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <h3>Are you sure ? You want to delete this User data ?</h3>
+        <h3>Are you sure ? You want to delete this Social Link data ?</h3>
       </div>
       <div class="modal-footer delete-modal">
         <a href="delete.php?deleteid=<?php echo $iconlist_row['social_slug']; ?>" class="btn btn-danger">Yes</a>

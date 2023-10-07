@@ -225,7 +225,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 				  </td>
 				
                 </tr>
-				<?php //include('modal.php');?>
+				<?php include('modal.php');?>
              <?php } ?>   
               </tbody>
                         </table>

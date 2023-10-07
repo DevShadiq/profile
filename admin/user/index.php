@@ -220,7 +220,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
                      <a href="edit.php?u=<?php echo $user_row['u_slug']?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(90deg,#ef3e0f,#ffb800);padding:1px 5px;border-radius:4px;" data-toggle="tooltip" data-placement="top" title="Edit User"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                  
-                     <a data-toggle="modal" data-target="#user<?php echo $user_row['user_id']?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(to right, #ff416c, #ff4b2b);padding:1px 5px;border-radius:4px;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                     <a data-toggle="modal" data-target="#user<?php echo $user_row['u_slug']?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(to right, #ff416c, #ff4b2b);padding:1px 5px;border-radius:4px;"><i class="fa fa-trash" aria-hidden="true"></i></a>
 						
 				  </td>
 				

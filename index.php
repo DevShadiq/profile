@@ -326,7 +326,7 @@ include 'sidebar.php';
 
 <!-- contact section ends -->
 
-<div class="credits"> created by <span> Sadiqur Rahman</span> | all rights reserved </div>
+<div class="credits"> Devloped by <span> Sadiqur Rahman</span> | all rights reserved </div>
 
 
 

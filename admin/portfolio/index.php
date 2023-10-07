@@ -133,7 +133,7 @@ if ($_SESSION['login'] != true) {
 								<thead>
 									<tr class="text-center" style="font-size:15px;text-align:center !important;">
 										<th>Portfolio Title</th>
-										<th>Portfolio Content</th>
+										<th>Portfolio Image</th>
 										<th>Status</th>
 										<th>Action</th>
 									</tr>

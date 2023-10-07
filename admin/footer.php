@@ -1,12 +1,16 @@
 <div class="sidenav-backdrop backdrop"></div>
 
 <footer class="page-footer">
-    <div class="font-13">2023 © <b>Sadiq</b> - All rights reserved.</div>
+    <div class="font-13"> <span id="year"></span> © <b>Sadiq</b> - All rights reserved.</div>
     <a class="px-4" href="https://www.facebook.com/saeemjp/" target="_blank">Sadiq Rahman</a>
     <div class="to-top"><i class="fa fa-angle-double-up"></i></div>
 </footer>
 </div>
 <!-- END PAGA BACKDROPS-->
+<script>
+    document.getElementById("year").innerHTML = new Date().getFullYear();
+</script>
+
 <!-- CORE PLUGINS-->
 <script src="<?php echo $path; ?>/assets/js/jquery.min.js"></script>
 <script src="<?php echo $path; ?>/assets/js/popper.min.js"></script>

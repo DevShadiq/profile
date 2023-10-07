@@ -8,7 +8,7 @@ if ($_SESSION['login'] != true) {
 } else {
 
 
-	$title = "Add Experience";
+	$title = "Add Portfolio";
 
 	include('../../connect.php');
 	include('../header.php');
@@ -21,30 +21,35 @@ if ($_SESSION['login'] != true) {
 				<div class="col-md-11">
 					<div>
 						<?php
+
 						if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-							$exp_title  = $_POST['exp_title'];
-							$exp_content  = $_POST['exp_content'];
-							$exp_status  = $_POST['exp_status'];
-
-							$exp_slug = uniqid();
-
-							$exp_title         = $conn->real_escape_string($exp_title);
-							$exp_content         = $conn->real_escape_string($exp_content);
-							$exp_status         = $conn->real_escape_string($exp_status);
+							$port_title  = $_POST['port_title'];
+							$port_status  = $_POST['port_status'];
+							$port_slug = uniqid();
+							$port_title         = $conn->real_escape_string($port_title);
+							$port_status         = $conn->real_escape_string($port_status);
 
 
+							// Handle image file
+							$imageFile = $_FILES['per_image']['name'];
+							$imageTemp = $_FILES['per_image']['tmp_name'];
 
-							$exp_sql = "insert into pro_experience(exp_title,exp_content,exp_status,exp_slug)
-values('$exp_title','$exp_content','$exp_status','$exp_slug')";
-
-							$exp_result = $conn->query($exp_sql);
-
-							if ($exp_result) {
-
-								echo '<div class="alert alert-success alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data submitted successfully</div>';
+							if ($imageFile == '') {
+								$upload_img  = '';
 							} else {
-								echo '<div class="alert alert-danger alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data not submitted </div>';
+								$upload_img = 'img/portfolio/' . $imageFile;
+							}
+
+							$port_sql = "insert into pro_Portfolio( port_title, port_image, port_status, port_slug)
+									values('$port_title','$upload_img','$port_status','$port_slug')";
+
+							$port_result = $conn->query($port_sql);
+
+							if ($port_result) {
+								move_uploaded_file($imageTemp, '../' . $upload_img);
+								echo '<div class="alert alert-success alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Portfolio Data submitted successfully</div>';
+							} else {
+								echo '<div class="alert alert-danger alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Portfolio Data not submitted </div>';
 							}
 						}
 
@@ -53,7 +58,7 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 
 					<div class="card form">
 						<div class="card-header">
-							Add Experience
+							Add Portfolio
 						</div>
 
 						<div class="card-body student2 pl-4 pr-4">
@@ -61,27 +66,25 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 								<div class="form-row">
 
 									<div class="form-group col-md-6">
-										<label for="exp_title">Experience Title &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-										<input type="text" class="form-control" id="exp_title" placeholder="Enter Experience Title" name="exp_title" value="<?php if (isset($exp_title)) {
-																																								echo $exp_title;
-																																							} ?>" data-parsley-trigger="change" data-parsley-required autocomplete>
+										<label for="port_title">Portfolio Title &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+										<input type="text" class="form-control" id="port_title" placeholder="Enter Portfolio Title" name="port_title" value="<?php if (isset($port_title)) {
+																																									echo $port_title;
+																																								} ?>" data-parsley-trigger="change" data-parsley-required autocomplete>
 									</div>
 
 									<div class="form-group col-md-6">
-										<label for="exp_content">Experience Content &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-										<input type="text" class="form-control" placeholder="Enter Experience Content" name="exp_content" value="<?php if (isset($exp_content)) {
-																																						echo $exp_content;
-																																					} ?>" autocomplete data-parsley-required>
+										<label for="per_image">Portfolio Image</label>
+										<input type="file" name="per_image" class="form-control" id="per_image" style="line-height:1.1;">
 									</div>
 
 									<div class="form-group col-md-6">
-										<label for="exp_status">Experience Status&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-										<select class="form-control" name="exp_status" data-parsley-required style="font-size:14px;color:#868e96;">
+										<label for="port_status">Portfolio Status&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+										<select class="form-control" name="port_status" data-parsley-required style="font-size:14px;color:#868e96;">
 											<option value="" style="font-size:14px;">Select Status</option>
-											<option <?php if (isset($exp_status) && $exp_status == 'active') {
+											<option <?php if (isset($port_status) && $port_status == 'active') {
 														echo 'selected';
 													} ?> value="active" style="font-size:14px;">Active</option>
-											<option <?php if (isset($exp_status) && $exp_status == 'pending') {
+											<option <?php if (isset($port_status) && $port_status == 'pending') {
 														echo 'selected';
 													} ?> value="pending" style="font-size:14px;">Pending</option>
 										</select>
@@ -123,14 +126,14 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 						</div>
 
 						<div class="ibox-head">
-							<div class="ibox-title">Experience List</div>
+							<div class="ibox-title">Portfolio List</div>
 						</div>
 						<div class="ibox-body data">
 							<table class="table table-bordered" id="example-table" cellspacing="0" width="100%">
 								<thead>
 									<tr class="text-center" style="font-size:15px;text-align:center !important;">
-										<th>Experience Title</th>
-										<th>Experience Content</th>
+										<th>Portfolio Title</th>
+										<th>Portfolio Content</th>
 										<th>Status</th>
 										<th>Action</th>
 									</tr>
@@ -138,22 +141,20 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 
 								<tbody>
 									<?php
-									$exp_sql = "select * from pro_experience";
-									$exp_result = $conn->query($exp_sql);
-									while ($exp_row = $exp_result->fetch_assoc()) {
+									$port_sql = "select * from pro_portfolio order by port_id asc";
+									$port_result = $conn->query($port_sql);
+									while ($port_row = $port_result->fetch_assoc()) {
 									?>
-
 										<tr class="text-center" style="font-size:15px;">
-
-											<td><?php echo $exp_row['exp_title']; ?></td>
-											<td><?php echo $exp_row['exp_content']; ?></td>
-											<td><?php echo $exp_row['exp_status']; ?></td>
-
+											<td><?php echo $port_row['port_title']; ?></td>
+											<td> <img src="../<?php echo $port_row['port_image'] ?>" width="80" height="100">
+											</td>
+											<td><?php echo $port_row['port_status']; ?></td>
 											<td>
 
-												<a href="edit.php?u=<?php echo $exp_row['exp_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(90deg,#ef3e0f,#ffb800);padding:1px 5px;border-radius:4px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="edit.php?u=<?php echo $port_row['port_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(90deg,#ef3e0f,#ffb800);padding:1px 5px;border-radius:4px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-												<a data-toggle="modal" data-target="#exp<?php echo $exp_row['exp_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(to right, #ff416c, #ff4b2b);padding:1px 5px;border-radius:4px;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+												<a data-toggle="modal" data-target="#port<?php echo $port_row['port_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(to right, #ff416c, #ff4b2b);padding:1px 5px;border-radius:4px;"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
 											</td>
 

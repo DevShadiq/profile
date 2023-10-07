@@ -20,18 +20,18 @@ if ($_SESSION['login'] != true) {
 		$deleteid = $_GET['deleteid'];
 	}
 
-	$delete_sc_sql = "DELETE FROM pro_experience WHERE exp_slug = '$deleteid'";
+	$delete_sc_sql = "DELETE FROM pro_portfolio WHERE port_slug = '$deleteid'";
 	$result_delete_sc = $conn->query($delete_sc_sql);
 
 	if ($result_delete_sc) {
 
-		$_SESSION['error'] = '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>Done !! User Experience Data Delete successfully ! </div>';
+		$_SESSION['error'] = '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>Done !! Portfolio Data Delete successfully ! </div>';
 
 		header('location:index.php');
 		exit();
 	} else {
 
-		$_SESSION['error'] = '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>Ups !! User Experience Data not Deleted ! </div>';
+		$_SESSION['error'] = '<div class="alert alert-success alert-dismissable mb-3 text-center"><button type="button" class="close" data-dismiss="alert"aria-hidden="true">&times;</button>Ups !! Portfolio Data not Deleted ! </div>';
 		header('location:index.php');
 		exit();
 	}

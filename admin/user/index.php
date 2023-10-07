@@ -61,7 +61,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
    
    if($check_count == 0){
 	
-   $user_sql = "insert into admin_user(name,email,username,password,phone,image,role,status,u_slug)values('$u_name','$u_email','$u_username','$u_password','$u_phone','$upload_img','$u_role','$u_status','$slug')";
+   $user_sql = "insert into admin_user(name,email,username,password,phone,image,role,status,u_slug)
+   values('$u_name','$u_email','$u_username','$u_password','$u_phone','$upload_img','$u_role','$u_status','$slug')";
    
    $user_result = $conn->query($user_sql);
    

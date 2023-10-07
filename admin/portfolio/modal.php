@@ -1,5 +1,5 @@
 <!-- delete city modal -->
-<div class="modal fade" id="portfolio<?php echo $pro_data['per_slug']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="port<?php echo $port_row['port_slug']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header delete">
@@ -9,10 +9,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <h3>Are you sure ? You want to delete this User Experience data?</h3>
+        <h3>Are you sure ? You want to delete this Portfolio data?</h3>
       </div>
       <div class="modal-footer delete-modal">
-        <a href="delete.php?deleteid=<?php echo $pro_data['per_slug']; ?>" class="btn btn-danger">Yes</a>
+        <a href="delete.php?deleteid=<?php echo $port_row['port_slug']; ?>" class="btn btn-danger">Yes</a>
       </div>
     </div>
   </div>

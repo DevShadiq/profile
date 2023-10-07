@@ -133,15 +133,17 @@ if ($_SESSION['login'] != true) {
 						</div>
 
 						<div class="ibox-head">
-							<div class="ibox-title">service List</div>
+							<div class="ibox-title">Service List</div>
 						</div>
 						<div class="ibox-body data">
 							<table class="table table-bordered" id="example-table" cellspacing="0" width="100%">
 								<thead>
 									<tr class="text-center" style="font-size:15px;text-align:center !important;">
-										<th>service Title</th>
-										<th>service Content</th>
+										<th>Service Title</th>
+										<th>Service Icon</th>
+										<th>Service Content</th>
 										<th>Status</th>
+
 										<th>Action</th>
 									</tr>
 								</thead>
@@ -156,6 +158,7 @@ if ($_SESSION['login'] != true) {
 										<tr class="text-center" style="font-size:15px;">
 
 											<td><?php echo $ser_row['ser_title']; ?></td>
+											<td><?php echo $ser_row['ser_icon']; ?></td>
 											<td><?php echo $ser_row['ser_content']; ?></td>
 											<td><?php echo $ser_row['ser_status']; ?></td>
 

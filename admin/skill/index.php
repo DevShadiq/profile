@@ -8,7 +8,7 @@ if ($_SESSION['login'] != true) {
 } else {
 
 
-	$title = "Add Experience";
+	$title = "Add Skill";
 
 	include('../../connect.php');
 	include('../header.php');
@@ -23,28 +23,27 @@ if ($_SESSION['login'] != true) {
 						<?php
 						if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-							$exp_title  = $_POST['exp_title'];
-							$exp_content  = $_POST['exp_content'];
-							$exp_status  = $_POST['exp_status'];
+							$sk_skilltitle  = $_POST['sk_skilltitle'];
+							$sk_content  = $_POST['sk_content'];
+							$sk_status  = $_POST['sk_status'];
+							$skill_slug = uniqid();
 
-							$exp_slug = uniqid();
-
-							$exp_title         = $conn->real_escape_string($exp_title);
-							$exp_content         = $conn->real_escape_string($exp_content);
-							$exp_status         = $conn->real_escape_string($exp_status);
-
+							$sk_skilltitle         = $conn->real_escape_string($sk_skilltitle);
+							$sk_content         = $conn->real_escape_string($sk_content);
+							$sk_status         = $conn->real_escape_string($sk_status);
 
 
-							$exp_sql = "insert into pro_experience(exp_title,exp_content,exp_status,exp_slug)
-values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 
-							$exp_result = $conn->query($exp_sql);
+							$skills_sql = "insert into pro_Skill(skill_title, skill_content, skill_status, skill_slug)
+                                           values('$sk_skilltitle','$sk_content','$sk_status','$skill_slug')";
 
-							if ($exp_result) {
+							$skill_result = $conn->query($skills_sql);
 
-								echo '<div class="alert alert-success alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data submitted successfully</div>';
+							if ($skill_result) {
+
+								echo '<div class="alert alert-success alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> Skill Data submitted successfully</div>';
 							} else {
-								echo '<div class="alert alert-danger alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Data not submitted </div>';
+								echo '<div class="alert alert-danger alert-dismissable mb-4 text-center"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>Skill Data not submitted </div>';
 							}
 						}
 
@@ -53,7 +52,7 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 
 					<div class="card form">
 						<div class="card-header">
-							Add Experience
+							Add Skill
 						</div>
 
 						<div class="card-body student2 pl-4 pr-4">
@@ -61,27 +60,27 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 								<div class="form-row">
 
 									<div class="form-group col-md-6">
-										<label for="exp_title">Experience Title &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-										<input type="text" class="form-control" id="exp_title" placeholder="Enter Experience Title" name="exp_title" value="<?php if (isset($exp_title)) {
-																																								echo $exp_title;
-																																							} ?>" data-parsley-trigger="change" data-parsley-required autocomplete>
+										<label for="sk_skilltitle">Skill Title &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+										<input type="text" class="form-control" id="sk_skilltitle" placeholder="Enter Skill Title" name="sk_skilltitle" value="<?php if (isset($skill_title)) {
+																																									echo $skill_title;
+																																								} ?>" data-parsley-trigger="change" data-parsley-required autocomplete>
 									</div>
 
 									<div class="form-group col-md-6">
-										<label for="exp_content">Experience Content &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-										<input type="text" class="form-control" placeholder="Enter Experience Content" name="exp_content" value="<?php if (isset($exp_content)) {
-																																						echo $exp_content;
-																																					} ?>" autocomplete data-parsley-required>
+										<label for="sk_content">Skill Content &nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+										<input type="text" class="form-control" placeholder="Enter Skill Content" name="sk_content" value="<?php if (isset($sk_content)) {
+																																				echo $sk_content;
+																																			} ?>" autocomplete data-parsley-required>
 									</div>
 
 									<div class="form-group col-md-6">
-										<label for="exp_status">Experience Status&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
-										<select class="form-control" name="exp_status" data-parsley-required style="font-size:14px;color:#868e96;">
+										<label for="sk_status">Skill Status&nbsp;<span><sup><i class="fa fa-asterisk" aria-hidden="true"></i></sup></span></label>
+										<select class="form-control" name="sk_status" data-parsley-required style="font-size:14px;color:#868e96;">
 											<option value="" style="font-size:14px;">Select Status</option>
-											<option <?php if (isset($exp_status) && $exp_status == 'active') {
+											<option <?php if (isset($sk_status) && $sk_status == 'active') {
 														echo 'selected';
 													} ?> value="active" style="font-size:14px;">Active</option>
-											<option <?php if (isset($exp_status) && $exp_status == 'pending') {
+											<option <?php if (isset($sk_status) && $sk_status == 'pending') {
 														echo 'selected';
 													} ?> value="pending" style="font-size:14px;">Pending</option>
 										</select>
@@ -123,14 +122,14 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 						</div>
 
 						<div class="ibox-head">
-							<div class="ibox-title">Experience List</div>
+							<div class="ibox-title">Skill List</div>
 						</div>
 						<div class="ibox-body data">
 							<table class="table table-bordered" id="example-table" cellspacing="0" width="100%">
 								<thead>
 									<tr class="text-center" style="font-size:15px;text-align:center !important;">
-										<th>Experience Title</th>
-										<th>Experience Content</th>
+										<th>Skill Title</th>
+										<th>Skill Content</th>
 										<th>Status</th>
 										<th>Action</th>
 									</tr>
@@ -138,27 +137,24 @@ values('$exp_title','$exp_content','$exp_status','$exp_slug')";
 
 								<tbody>
 									<?php
-									$exp_sql = "select * from pro_experience";
-									$exp_result = $conn->query($exp_sql);
-									while ($exp_row = $exp_result->fetch_assoc()) {
+									$skills_sql = "select * from pro_skill";
+									$skill_result = $conn->query($skills_sql);
+									while ($skill_row = $skill_result->fetch_assoc()) {
 									?>
-
 										<tr class="text-center" style="font-size:15px;">
-
-											<td><?php echo $exp_row['exp_title']; ?></td>
-											<td><?php echo $exp_row['exp_content']; ?></td>
-											<td><?php echo $exp_row['exp_status']; ?></td>
+											<td><?php echo $skill_row['skill_title']; ?></td>
+											<td><?php echo $skill_row['skill_content']; ?></td>
+											<td><?php echo $skill_row['skill_status']; ?></td>
 
 											<td>
 
-												<a href="edit.php?u=<?php echo $exp_row['exp_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(90deg,#ef3e0f,#ffb800);padding:1px 5px;border-radius:4px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+												<a href="edit.php?u=<?php echo $skill_row['skill_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(90deg,#ef3e0f,#ffb800);padding:1px 5px;border-radius:4px;" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
-												<a data-toggle="modal" data-target="#exp<?php echo $exp_row['exp_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(to right, #ff416c, #ff4b2b);padding:1px 5px;border-radius:4px;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+												<a data-toggle="modal" data-target="#skl<?php echo $skill_row['skill_slug'] ?>" class="" style="color:#ffffff;font-weight:bold;background: linear-gradient(to right, #ff416c, #ff4b2b);padding:1px 5px;border-radius:4px;"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
 											</td>
 
 										</tr>
-
 										<?php include('modal.php'); ?>
 									<?php } ?>
 								</tbody>
